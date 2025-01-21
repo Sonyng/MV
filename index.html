@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de Dias</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div id="loginPage">
+        <p>Digite a senha:</p>
+        <input type="password" id="password" placeholder="Senha">
+        <button onclick="checkPassword()">Entrar</button>
+    </div>
+
+    <div id="mainContent">
+        <div class="C1">
+        <header class="counter" id="counter"></header>
+
+        <div class="container">
+            <img src="./Src/01.jpeg" alt="Foto" class="photo">
+            <div class="quote">O amor está em cada detalhe ❤️</div>
+        </div>
+    </div>
+
+
+    <DIV class="C2">
+        <div class="carousel-container">
+            <div class="carousel" id="carousel">
+                <div class="carousel-slide">
+                    <img src="./Src/WhatsApp Image 2025-01-20 at 23.42.50.jpeg" width="248px" height="331px" alt="Imagem 1">
+                    <p class="carousel-caption">Me apaixonei pelo seu olhar 💖</p>
+                </div>
+                <div class="carousel-slide">
+                    <img src="./Src/02.jpeg" width="248px" height="331px" alt="Imagem 2">
+                    <p class="carousel-caption">Encontrei paz na sua presença</p>
+                </div>
+                <div class="carousel-slide">
+                    <img src="./Src/WhatsApp Image 2025-01-21 at 00.18.38.jpeg" width="248px" height="331px" alt="Imagem 3">
+                    <p class="carousel-caption">Me encantei completamente por você</p>
+                </div>
+                <div class="carousel-slide">
+                    <img src="./Src/03.jpeg" width="248px" height="331px" alt="Imagem 4">
+                    <p class="carousel-caption">Eu te amo minha princesa💙</p>
+                </div>
+            </div>
+            <button class="carousel-btn prev" onclick="previousSlide()">&#10094;</button>
+            <button class="carousel-btn next" onclick="nextSlide()">&#10095;</button>
+        </div>
+    </div>
+</DIV>
+    <script>
+
+function startHearts() {
+    const heartInterval = setInterval(() => {
+        if (document.getElementById('mainContent').style.display === 'flex') {
+            createHeart();
+        } else {
+            clearInterval(heartInterval); // Para o intervalo se o usuário sair da tela principal
+        }
+    }, 500); // Um coração novo a cada 500ms
+}
+
+
+
+setInterval(() => {
+    createHeart();
+}, 500)
+
+let heartsActive = false; // Controla se os corações estão ativos
+
+function createHeart() {
+    if (!heartsActive) return; // Não cria corações se eles estiverem desativados
+
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = `${Math.random() * 100}vw`; // Posição horizontal aleatória
+    heart.style.animationDuration = `${2 + Math.random() * 3}s`; // Duração aleatória
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 3000); // Remove o coração após 3 segundos
+}
+
+function startHearts() {
+    heartsActive = true; // Ativa a criação dos corações
+}
+
+function stopHearts() {
+    heartsActive = false; // Desativa a criação dos corações
+}
+
+// Chama `createHeart` periodicamente
+setInterval(createHeart, 500); // Um coração novo a cada 500ms
+
+        document.getElementById('mainContent').style.display = 'flex';
+        function calculateDaysSince(dateString) {
+            const startDate = new Date(dateString);
+            const today = new Date();
+            const timeDifference = today - startDate;
+            const daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+            return daysDifference;
+        }
+
+        function updateCounter() {
+            const startDate = '2024-12-21';
+            const days = calculateDaysSince(startDate);
+            document.getElementById('counter').textContent = `Dias juntos: ${days}`;
+        }
+
+        function checkPassword() {
+    const inputPassword = document.getElementById('password').value;
+    const correctPassword = '21122024';
+    if (inputPassword === correctPassword) {
+        document.getElementById('loginPage').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'flex';
+        updateCounter();
+        startHearts(); // Inicia a animação de corações na tela principal
+    } else {
+        alert('Senha incorreta!');
+    }
+}
+
+        // Carrossel
+        let currentSlideIndex = 0;
+
+        function updateCarousel() {
+            const carousel = document.getElementById('carousel');
+            const totalSlides = carousel.children.length;
+            carousel.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+        }
+
+        function nextSlide() {
+            const totalSlides = document.getElementById('carousel').children.length;
+            currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function previousSlide() {
+            const totalSlides = document.getElementById('carousel').children.length;
+            currentSlideIndex = (currentSlideIndex - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+       
+
+        
+        // Início
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('mainContent').style.display = 'none';
+        });
+ </script>
+</body>
+</html>
